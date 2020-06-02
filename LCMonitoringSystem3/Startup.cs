@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using LCMonitoringSystem3.Models.Autorisation;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using LCMonitoringSystem3.Models;
 
 namespace LCMonitoringSystem3
 {
@@ -23,6 +27,19 @@ namespace LCMonitoringSystem3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<AutorisationContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("AccountDBConnection")));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
+
+            services.AddDbContext<IndicatorsDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("IndicatorsDBConnection")));
+
             services.AddControllersWithViews();
         }
 
@@ -43,14 +60,15 @@ namespace LCMonitoringSystem3
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseRequestLocalization("en-UY", "fr-FR");
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Indicators}/{action=Index}/{id?}");
             });
         }
     }

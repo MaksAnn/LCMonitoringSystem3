@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LCMonitoringSystem3.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace LCMonitoringSystem3.Controllers
 {
@@ -18,11 +20,15 @@ namespace LCMonitoringSystem3.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "admin, user")]
         public IActionResult Index()
         {
+            string role = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
+            ViewBag.Role = role;
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Privacy()
         {
             return View();

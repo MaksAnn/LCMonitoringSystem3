@@ -1,0 +1,125 @@
+﻿@model IEnumerable<LCMonitoringSystem3.Models.IndicatorsModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Year
+            </th>
+            <th>
+                Region
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vrp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfEnterprises)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WasteGeneration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpendituresOnEnvProt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalEmissions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarbonMonoxide)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Methane)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NitrogenDioxide)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NitricOxide)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Soot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SulfurDioxide)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonMetOrgCompounds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarbonDioxide)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FromMobileSources)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year.YearNumb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vrp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfEnterprises)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WasteGeneration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpendituresOnEnvProt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalEmissions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarbonMonoxide)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Methane)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NitrogenDioxide)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NitricOxide)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SulfurDioxide)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonMetOrgCompounds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarbonDioxide)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromMobileSources)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
