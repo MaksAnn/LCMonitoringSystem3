@@ -9,8 +9,8 @@ namespace LCMonitoringSystem3.Models
     public class IndicatorsDbContext: DbContext
     {
         public DbSet<IndicatorsModel> Indicators { get; set; }
-        public DbSet<Region> Region { get; set; }
-        public DbSet<Year> Year { get; set; }
+        public DbSet<Region> Regions { get; set; }
+        public DbSet<Year> Years { get; set; }
         public IndicatorsDbContext(DbContextOptions<IndicatorsDbContext> options)
             : base(options)
         {

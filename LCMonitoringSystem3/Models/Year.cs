@@ -13,6 +13,8 @@ namespace LCMonitoringSystem3.Models
 
         public int YearNumb { get; set; }
 
+        public string YearName { get; set; }
+
         public List<IndicatorsModel> Indicators { get; set; }
         public Year()
         {

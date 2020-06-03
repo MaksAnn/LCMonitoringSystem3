@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200601193229_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200601193229_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200602102901_YearName.cs" />
+    <Compile Remove="Migrations\20200602102901_YearName.Designer.cs" />
+    <Compile Remove="Migrations\20200602103159_4DB.cs" />
+    <Compile Remove="Migrations\20200602103159_4DB.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
@@ -13,6 +22,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TagHelpers\" />
   </ItemGroup>
 
 </Project>

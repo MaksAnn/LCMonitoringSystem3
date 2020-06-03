@@ -21,7 +21,7 @@ namespace LCMonitoringSystem3.Controllers
         // GET: Years
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Year.ToListAsync());
+            return View(await _context.Years.ToListAsync());
         }
 
         // GET: Years/Details/5
@@ -32,7 +32,7 @@ namespace LCMonitoringSystem3.Controllers
                 return NotFound();
             }
 
-            var year = await _context.Year
+            var year = await _context.Years
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (year == null)
             {
@@ -53,7 +53,7 @@ namespace LCMonitoringSystem3.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,YearNumb")] Year year)
+        public async Task<IActionResult> Create([Bind("Id,YearNumb,YearName")] Year year)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace LCMonitoringSystem3.Controllers
                 return NotFound();
             }
 
-            var year = await _context.Year.FindAsync(id);
+            var year = await _context.Years.FindAsync(id);
             if (year == null)
             {
                 return NotFound();
@@ -85,7 +85,7 @@ namespace LCMonitoringSystem3.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,YearNumb")] Year year)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,YearNumb,YearName")] Year year)
         {
             if (id != year.Id)
             {
@@ -123,7 +123,7 @@ namespace LCMonitoringSystem3.Controllers
                 return NotFound();
             }
 
-            var year = await _context.Year
+            var year = await _context.Years
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (year == null)
             {
@@ -138,15 +138,15 @@ namespace LCMonitoringSystem3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var year = await _context.Year.FindAsync(id);
-            _context.Year.Remove(year);
+            var year = await _context.Years.FindAsync(id);
+            _context.Years.Remove(year);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool YearExists(int id)
         {
-            return _context.Year.Any(e => e.Id == id);
+            return _context.Years.Any(e => e.Id == id);
         }
     }
 }

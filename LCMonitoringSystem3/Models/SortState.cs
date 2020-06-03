@@ -1,0 +1,39 @@
+﻿
+namespace LCMonitoringSystem3.Models
+{
+    public enum SortState
+    {
+        YearAsc,
+        YearDesc,
+        RegionAsc,
+        RegionDesc,
+        VrpAsc,
+        VrpDesc,
+        NumberOfEnterprisesAsc,
+        NumberOfEnterprisesDesc,
+        WasteGenerationAsc,
+        WasteGenerationDesc,
+        ExpendituresOnEnvProtAsc,
+        ExpendituresOnEnvProtDesc,
+        TotalEmissionsAsc,
+        TotalEmissionsDesc,
+        CarbonMonoxideAsc,
+        CarbonMonoxideDesc,
+        MethaneAsc,
+        MethaneDesc,
+        NitrogenDioxideAsc,
+        NitrogenDioxideDesc,
+        NitricOxideAsc,
+        NitricOxideDesc,
+        SootAsc,
+        SootDesc,
+        SulfurDioxideAsc,
+        SulfurDioxideDesc,
+        NonMetOrgCompoundsAsc,
+        NonMetOrgCompoundsDesc,
+        CarbonDioxideAsc,
+        CarbonDioxideDesc,
+        FromMobileSourcesAsc,
+        FromMobileSourcesDesc
+    }
+}

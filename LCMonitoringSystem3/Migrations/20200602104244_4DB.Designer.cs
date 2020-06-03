@@ -3,14 +3,16 @@ using LCMonitoringSystem3.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LCMonitoringSystem3.Migrations
 {
     [DbContext(typeof(IndicatorsDbContext))]
-    partial class IndicatorsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200602104244_4DB")]
+    partial class _4DB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +96,7 @@ namespace LCMonitoringSystem3.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Regions");
+                    b.ToTable("Region");
                 });
 
             modelBuilder.Entity("LCMonitoringSystem3.Models.Year", b =>
@@ -112,7 +114,7 @@ namespace LCMonitoringSystem3.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Years");
+                    b.ToTable("Year");
                 });
 
             modelBuilder.Entity("LCMonitoringSystem3.Models.IndicatorsModel", b =>

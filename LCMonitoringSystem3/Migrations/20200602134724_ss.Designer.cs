@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LCMonitoringSystem3.Migrations
 {
     [DbContext(typeof(IndicatorsDbContext))]
-    [Migration("20200601193229_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200602134724_ss")]
+    partial class ss
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,7 @@ namespace LCMonitoringSystem3.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Region");
+                    b.ToTable("Regions");
                 });
 
             modelBuilder.Entity("LCMonitoringSystem3.Models.Year", b =>
@@ -106,12 +106,15 @@ namespace LCMonitoringSystem3.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("YearName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("YearNumb")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Year");
+                    b.ToTable("Years");
                 });
 
             modelBuilder.Entity("LCMonitoringSystem3.Models.IndicatorsModel", b =>

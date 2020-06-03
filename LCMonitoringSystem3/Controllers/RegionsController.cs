@@ -21,7 +21,7 @@ namespace LCMonitoringSystem3.Controllers
         // GET: Regions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Region.ToListAsync());
+            return View(await _context.Regions.ToListAsync());
         }
 
         // GET: Regions/Details/5
@@ -32,7 +32,7 @@ namespace LCMonitoringSystem3.Controllers
                 return NotFound();
             }
 
-            var region = await _context.Region
+            var region = await _context.Regions
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (region == null)
             {
@@ -72,7 +72,7 @@ namespace LCMonitoringSystem3.Controllers
                 return NotFound();
             }
 
-            var region = await _context.Region.FindAsync(id);
+            var region = await _context.Regions.FindAsync(id);
             if (region == null)
             {
                 return NotFound();
@@ -123,7 +123,7 @@ namespace LCMonitoringSystem3.Controllers
                 return NotFound();
             }
 
-            var region = await _context.Region
+            var region = await _context.Regions
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (region == null)
             {
@@ -138,15 +138,15 @@ namespace LCMonitoringSystem3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var region = await _context.Region.FindAsync(id);
-            _context.Region.Remove(region);
+            var region = await _context.Regions.FindAsync(id);
+            _context.Regions.Remove(region);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RegionExists(int id)
         {
-            return _context.Region.Any(e => e.Id == id);
+            return _context.Regions.Any(e => e.Id == id);
         }
     }
 }
