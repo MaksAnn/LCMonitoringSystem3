@@ -4,7 +4,10 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutForDB.cshtml";
 }
+
+
 <style>
     @@font-face {
         font-family: 'FontAwesome';
@@ -31,26 +34,26 @@
     }
 </style>
 
-<h1>Index</h1>
+<h1 class="text-center">Усі дані</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a  asp-action="Create" class="btn btn-success" ><i class="fas fa-plus-square"></i> Додати дані</a>
 </p>
 
 <form method="get">
     <div class="form-inline">
 
-        <label>Рік: </label>
+        <label style="margin:10px">Рік: </label>
         <select name="year" asp-items="Model.FilterViewModel.Years" class="form-control"></select>
 
-        <label>Регіон: </label>
+        <label style="margin:10px">Регіон: </label>
         <select name="region" asp-items="Model.FilterViewModel.Regions" class="form-control"></select>
 
-        <input type="submit" value="Фильтр" class="btn btn-outline-dark" />
+        <input style="margin:10px" type="submit" value="Пошук" class="btn btn-outline-dark" />
     </div>
 </form>
 
-<table class="table">
+<table class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -105,7 +108,7 @@
                 <a asp-action="Index"
                    asp-route-sortOrder="@(Model.SortViewModel.MethaneSort)"
                    asp-route-year="@(Model.FilterViewModel.SelectedYear)"
-                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">CH<sub>4</sub></a>
+                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">CH4></a>
             </th>
             <th>
                 <a asp-action="Index"
@@ -117,7 +120,7 @@
                 <a asp-action="Index"
                    asp-route-sortOrder="@(Model.SortViewModel.NitricOxideSort)"
                    asp-route-year="@(Model.FilterViewModel.SelectedYear)"
-                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">N<sub>2</sub>O</a>
+                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">N2O</a>
             </th>
             <th>
                 <a asp-action="Index"
@@ -129,7 +132,7 @@
                 <a asp-action="Index"
                    asp-route-sortOrder="@(Model.SortViewModel.SulfurDioxideSort)"
                    asp-route-year="@(Model.FilterViewModel.SelectedYear)"
-                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">SO<sub>2</sub></a>
+                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">SO2</a>
             </th>
             <th>
                 <a asp-action="Index"
@@ -141,7 +144,7 @@
                 <a asp-action="Index"
                    asp-route-sortOrder="@(Model.SortViewModel.CarbonDioxideSort)"
                    asp-route-year="@(Model.FilterViewModel.SelectedYear)"
-                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)"> CO<sub>2</sub></a>
+                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)"> CO2</a>
             </th>
             <th>
                 <a asp-action="Index"
@@ -205,14 +208,17 @@
                     @Html.DisplayFor(modelItem => item.FromMobileSources)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"  class="btn btn-secondary"><i class="fas fa-pen-square"></i></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-info"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+
 @if (Model.PageViewModel.HasPreviousPage)
 {
     <a asp-action="Index"

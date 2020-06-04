@@ -1,29 +1,37 @@
-﻿@model LCMonitoringSystem3.Models.Year
+﻿@model LCMonitoringSystem3.Models.IndicatorInfo
 
 @{
     ViewData["Title"] = "Деталі";
     Layout = "~/Views/Shared/_LayoutForDB.cshtml";
 }
 
-<h1 class="text-center">Рік:</h1>
+<h1 class="text-center">Індикатор:</h1>
+
 
 <table class="table table-striped table-bordered" style="width:30%; margin: auto;">
     <tbody>
         <tr>
             <td>
-                Рік:
+                Повна назва:
             </td>
-
             <td>
-                @Html.DisplayFor(model => model.YearNumb)
+                @Html.DisplayFor(model => model.FullName)
             </td>
         </tr>
         <tr>
             <td>
-                Назва року:
+                Скорочення:
             </td>
             <td>
-                @Html.DisplayFor(model => model.YearName)
+                @Html.DisplayFor(model => model.ShortName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Одиниця вимірювання:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Unit)
             </td>
         </tr>
     </tbody>
@@ -33,3 +41,4 @@
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary"><i class="fas fa-pen-square"></i> Редагувати</a> |
     <a asp-action="Index" class="btn btn-secondary">Назад до списку</a>
 </div>
+

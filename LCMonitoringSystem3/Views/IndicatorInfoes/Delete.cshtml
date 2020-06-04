@@ -1,10 +1,9 @@
-﻿@model LCMonitoringSystem3.Models.Year
+﻿@model LCMonitoringSystem3.Models.IndicatorInfo
 
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_LayoutForDB.cshtml";
 }
-
 
 <h2 class="text-center">Ви впевнені що хочете видалити цей запис?</h2>
 <div>
@@ -13,19 +12,26 @@
         <tbody>
             <tr>
                 <td>
-                    Рік:
+                    Повна назва:
                 </td>
-
                 <td>
-                    @Html.DisplayFor(model => model.YearNumb)
+                    @Html.DisplayFor(model => model.FullName)
                 </td>
             </tr>
             <tr>
                 <td>
-                    Назва року:
+                    Скорочення:
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.YearName)
+                    @Html.DisplayFor(model => model.ShortName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Одиниця вимірювання:
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Unit)
                 </td>
             </tr>
         </tbody>

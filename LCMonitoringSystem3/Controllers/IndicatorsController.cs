@@ -24,7 +24,7 @@ namespace LCMonitoringSystem3.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index(int? year, int? region, int page = 1, SortState sortOrder = SortState.YearDesc)
         {
-            int pageSize = 3;
+            int pageSize = 28;
 
             //Фильтрация
             IQueryable<IndicatorsModel> indicators = _context.Indicators.Include(i => i.Region).Include(i => i.Year);
@@ -150,10 +150,11 @@ namespace LCMonitoringSystem3.Controllers
                 PageViewModel = new PageViewModel(count, page, pageSize),
                 SortViewModel = new SortViewModel(sortOrder),
                 FilterViewModel = new FilterViewModel(_context.Years.ToList(), year, _context.Regions.ToList(), region),
-                Indicators = items
+                Indicators = items,
+                Info = _context.Info
             };
 
-
+            
             return View(viewModel);
         }
 
@@ -203,6 +204,7 @@ namespace LCMonitoringSystem3.Controllers
             }
             ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Id", indicatorsModel.RegionId);
             ViewData["YearId"] = new SelectList(_context.Years, "Id", "Id", indicatorsModel.YearId);
+            
             return View(indicatorsModel);
         }
 

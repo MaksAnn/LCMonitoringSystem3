@@ -1,114 +1,158 @@
 ﻿@model LCMonitoringSystem3.Models.IndicatorsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Деталі";
+    Layout = "~/Views/Shared/_LayoutForDB.cshtml";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">Індикатори:</h1>
 
-<div>
-    <h4>IndicatorsModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Year)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Year.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Region)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Region.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vrp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vrp)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfEnterprises)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfEnterprises)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WasteGeneration)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WasteGeneration)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExpendituresOnEnvProt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExpendituresOnEnvProt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalEmissions)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalEmissions)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CarbonMonoxide)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CarbonMonoxide)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Methane)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Methane)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NitrogenDioxide)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NitrogenDioxide)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NitricOxide)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NitricOxide)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Soot)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Soot)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SulfurDioxide)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SulfurDioxide)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonMetOrgCompounds)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonMetOrgCompounds)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CarbonDioxide)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CarbonDioxide)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FromMobileSources)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FromMobileSources)
-        </dd>
-    </dl>
+<table class="table table-striped table-bordered" style="width:30%; margin: auto;">
+    <tbody>
+        <tr>
+            <td>
+                Рік:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Year.Id)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Рік:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Year.Id)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Регіон:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Region.Id)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ВРП (2):
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Vrp)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Кількість підприємств:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.NumberOfEnterprises)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Утворення відходів:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.WasteGeneration)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Витрати на охорону навколишнього природного середовища:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ExpendituresOnEnvProt)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Обсяг викидів забруд-нюючих речовин − усього:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.TotalEmissions)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Оксиду вуглецю:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CarbonMonoxide)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Метану:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Methane)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Діоксиду азоту:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.NitrogenDioxide)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Оксиду азоту:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.NitricOxide)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Сажі:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Soot)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Діоксиду сірки:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.SulfurDioxide)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Неметанових легких органічних сполук:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.NonMetOrgCompounds)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Діоксиду вуглецю:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CarbonDioxide)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Викиди від пересувних джерел забруднення:
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.FromMobileSources)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="container" style="margin-top: 10px; margin-left: auto;">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary"><i class="fas fa-pen-square"></i> Редагувати</a> |
+    <a asp-action="Index" class="btn btn-secondary">Назад до списку</a>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+

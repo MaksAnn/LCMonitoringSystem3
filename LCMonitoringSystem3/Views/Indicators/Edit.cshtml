@@ -1,107 +1,106 @@
 ﻿@model LCMonitoringSystem3.Models.IndicatorsModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редагувати";
+    Layout = "~/Views/Shared/_LayoutForDB.cshtml";
 }
 
-<h1>Edit</h1>
 
-<h4>IndicatorsModel</h4>
+<h1 class="text-center">Редагувати запис:</h1>>
+
+
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="margin: auto;">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="YearId" class="control-label"></label>
+                <label asp-for="YearId" class="control-label">Рік:</label>
                 <select asp-for="YearId" class="form-control" asp-items="ViewBag.YearNumb"></select>
-                <span asp-validation-for="YearId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RegionId" class="control-label"></label>
+                <label asp-for="RegionId" class="control-label">Регіон:</label>
                 <select asp-for="RegionId" class="form-control" asp-items="ViewBag.RegionName"></select>
-                <span asp-validation-for="RegionId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Vrp" class="control-label"></label>
+                <label asp-for="Vrp" class="control-label">ВРП (2) (млн.грн):</label>
                 <input asp-for="Vrp" class="form-control" />
                 <span asp-validation-for="Vrp" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfEnterprises" class="control-label"></label>
+                <label asp-for="NumberOfEnterprises" class="control-label">Кількість підприємств:</label>
                 <input asp-for="NumberOfEnterprises" class="form-control" />
                 <span asp-validation-for="NumberOfEnterprises" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WasteGeneration" class="control-label"></label>
+                <label asp-for="WasteGeneration" class="control-label">Утворення відходів, (тис.т.):</label>
                 <input asp-for="WasteGeneration" class="form-control" />
                 <span asp-validation-for="WasteGeneration" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ExpendituresOnEnvProt" class="control-label"></label>
+                <label asp-for="ExpendituresOnEnvProt" class="control-label"> Витрати на охорону навколишнього природного середовища, (млн грн):</label>
                 <input asp-for="ExpendituresOnEnvProt" class="form-control" />
                 <span asp-validation-for="ExpendituresOnEnvProt" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TotalEmissions" class="control-label"></label>
+                <label asp-for="TotalEmissions" class="control-label">Обсяг викидів забруд-нюючих речовин − усього:</label>
                 <input asp-for="TotalEmissions" class="form-control" />
                 <span asp-validation-for="TotalEmissions" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CarbonMonoxide" class="control-label"></label>
+                <label asp-for="CarbonMonoxide" class="control-label">Оксиду вуглецю,  (тис.т):</label>
                 <input asp-for="CarbonMonoxide" class="form-control" />
                 <span asp-validation-for="CarbonMonoxide" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Methane" class="control-label"></label>
+                <label asp-for="Methane" class="control-label">метану,  (тис.т):</label>
                 <input asp-for="Methane" class="form-control" />
                 <span asp-validation-for="Methane" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NitrogenDioxide" class="control-label"></label>
+                <label asp-for="NitrogenDioxide" class="control-label">діоксиду азоту,  (тис.т):</label>
                 <input asp-for="NitrogenDioxide" class="form-control" />
                 <span asp-validation-for="NitrogenDioxide" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NitricOxide" class="control-label"></label>
+                <label asp-for="NitricOxide" class="control-label">оксиду азоту,  (тис.т):</label>
                 <input asp-for="NitricOxide" class="form-control" />
                 <span asp-validation-for="NitricOxide" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Soot" class="control-label"></label>
+                <label asp-for="Soot" class="control-label">сажі, (тис.т):</label>
                 <input asp-for="Soot" class="form-control" />
                 <span asp-validation-for="Soot" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SulfurDioxide" class="control-label"></label>
+                <label asp-for="SulfurDioxide" class="control-label">діоксиду сірки,  (тис.т):</label>
                 <input asp-for="SulfurDioxide" class="form-control" />
                 <span asp-validation-for="SulfurDioxide" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NonMetOrgCompounds" class="control-label"></label>
+                <label asp-for="NonMetOrgCompounds" class="control-label">неметанових летких органічних сполук,  (тис.т):</label>
                 <input asp-for="NonMetOrgCompounds" class="form-control" />
                 <span asp-validation-for="NonMetOrgCompounds" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CarbonDioxide" class="control-label"></label>
+                <label asp-for="CarbonDioxide" class="control-label">діоксиду вуглецю, (млн.т):</label>
                 <input asp-for="CarbonDioxide" class="form-control" />
                 <span asp-validation-for="CarbonDioxide" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FromMobileSources" class="control-label"></label>
+                <label asp-for="FromMobileSources" class="control-label">Викиди від пересувних джерел забруднення, (т):</label>
                 <input asp-for="FromMobileSources" class="form-control" />
                 <span asp-validation-for="FromMobileSources" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Редагувати" class="btn btn-primary" />
             </div>
         </form>
+        <div>
+            <a asp-action="Index" class="btn btn-secondary">Назад до списку</a>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -3,14 +3,16 @@ using LCMonitoringSystem3.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LCMonitoringSystem3.Migrations
 {
     [DbContext(typeof(IndicatorsDbContext))]
-    partial class IndicatorsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200603180412_Info")]
+    partial class Info
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

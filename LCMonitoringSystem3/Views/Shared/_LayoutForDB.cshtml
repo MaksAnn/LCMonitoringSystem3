@@ -6,6 +6,8 @@
     <title>@ViewData["Title"] - Система моніторингу НВР</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -19,19 +21,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Статистика за регіонами</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Indicators" asp-action="Index">Усі дані</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Статистика за роками</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Regions" asp-action="Index">Регіони</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Індикатори</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Years" asp-action="Index">Роки</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Monitoring" asp-action="Index">Кореляція</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Indicators" asp-action="Index">Адміністрування БД</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="IndicatorInfoes" asp-action="Index">Індикатори</a>
                         </li>
 
 
@@ -40,12 +39,12 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" style="max-width:100%">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer text-muted" style="background:white">
+    <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 Контент доступний за лізензією <a href="https://creativecommons.org/licenses/by/4.0/deed.uk">Creative Commons Attribution 4.0 International license</a>
 
@@ -53,8 +52,10 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
     @RenderSection("Scripts", required: false)
 </body>
 

@@ -1,23 +1,26 @@
-﻿@model IEnumerable<LCMonitoringSystem3.Models.Region>
+﻿@model IEnumerable<LCMonitoringSystem3.Models.IndicatorInfo>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutForDB.cshtml";
 }
 
-<h1 class="text-center">Регіони</h1>
+<h1 class="text-center">Індикатори</h1>
 
-<p style="width:30%; margin: auto; margin-bottom:10px">
+<p style="width:70%; margin: auto; margin-bottom:10px">
     <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus-square"></i> Додати дані</a>
 </p>
-<table class="table table-striped table-bordered" style="width:30%; margin: auto;">
+<table class="table table-striped table-bordered" style="width:70%; margin: auto;">
     <thead>
         <tr>
             <th>
-                Номер
+                Повна назва
             </th>
             <th>
-                Регіон
+                Скорочення
+            </th>
+            <th>
+                Одиниці вимірювання
             </th>
             <th></th>
         </tr>
@@ -26,10 +29,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.ShortName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fas fa-pen-square"></i></a> |

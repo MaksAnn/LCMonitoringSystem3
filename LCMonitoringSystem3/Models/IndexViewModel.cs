@@ -8,8 +8,10 @@ namespace LCMonitoringSystem3.Models
     public class IndexViewModel
     {
         public IEnumerable<IndicatorsModel> Indicators { get; set; }
+        public IEnumerable<IndicatorInfo> Info { get; set; }
         public PageViewModel PageViewModel { get; set; }
         public FilterViewModel FilterViewModel { get; set; }
         public SortViewModel SortViewModel { get; set; }
+
     }
 }
