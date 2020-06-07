@@ -68,7 +68,7 @@ namespace LCMonitoringSystem3
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Indicators}/{action=Index}/{id?}");
+                    pattern: "{controller=Monitoring}/{action=RegionStat}/{id?}");
             });
         }
     }

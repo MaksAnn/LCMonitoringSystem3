@@ -1,0 +1,367 @@
+﻿@using LCMonitoringSystem3.Models
+
+@model ChartFilterViewModel
+
+@{
+    ViewData["Title"] = "Регіони";
+}
+
+<style>
+    @@font-face {
+        font-family: 'FontAwesome';
+        src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal
+    }
+
+    .glyphicon {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale
+    }
+
+    .glyphicon-chevron-right:before {
+        content: "\f054";
+    }
+
+    .glyphicon-chevron-left:before {
+        content: "\f053";
+    }
+</style>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChartPolutions);
+    google.charts.setOnLoadCallback(drawCarbDionxid);
+    google.charts.setOnLoadCallback(drawAuto);
+
+    google.charts.setOnLoadCallback(drawChartVrp);
+    google.charts.setOnLoadCallback(drawChartNumberOfEnterprises);
+    google.charts.setOnLoadCallback(drawChartWasteGeneration);
+    google.charts.setOnLoadCallback(drawChartExpendituresOnEnvProt);
+
+
+    function drawChartPolutions() {
+            var YearsMas =  @Json.Serialize(ViewBag.YearsMass);
+            var CarbonMonoxideMass = @Json.Serialize(ViewBag.CarbonMonoxideMass);
+            var MethaneMass = @Json.Serialize(ViewBag.MethaneMass);
+            var NitrogenDioxideMass = @Json.Serialize(ViewBag.NitrogenDioxideMass);
+
+            var NitricOxideMass = @Json.Serialize(ViewBag.NitricOxideMass);
+            var SootMass = @Json.Serialize(ViewBag.SootMass);
+            var SulfurDioxideMass = @Json.Serialize(ViewBag.SulfurDioxideMass);
+            var NonMetOrgCompoundsMass = @Json.Serialize(ViewBag.NonMetOrgCompoundsMass);
+
+            // Create the data table.
+            var Array = [
+                ['Рік', 'CO', 'CH4', 'NO2',
+                    'N2O', 'Сажі', 'SO2', 'НМЛОС',
+                     { role: 'annotation' }]];
+            for (var i = 0; i < YearsMas.length; i++) {
+                Array.push([YearsMas[i], CarbonMonoxideMass[i], MethaneMass[i], NitrogenDioxideMass[i],
+                    NitricOxideMass[i], SootMass[i], SulfurDioxideMass[i], NonMetOrgCompoundsMass[i], '']);
+            }
+
+
+            //['2010', 10, 24, 20, 32, 18, 5, 18, 5, ''],
+            //    ['2020', 16, 22, 23, 30, 16, 9, 18, 5, ''],
+            //    ['2030', 28, 19, 29, 30, 12, 13, 18, 5, ''] ];
+
+            var data = google.visualization.arrayToDataTable(Array);
+
+
+
+
+            // Set chart options
+        var options = {
+                width: 600,
+                height: 400,
+                legend: { position: 'top', maxLines: 3 },
+                bar: { groupWidth: '75%' },
+                isStacked: true,
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+            chart.draw(data, options);
+    }
+
+    function drawCarbDionxid() {
+        var YearMass = @Json.Serialize(ViewBag.YearsMass);
+            var CarbonDioxideMass = @Json.Serialize(ViewBag.CarbonDioxideMass);
+
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Рік');
+            data.addColumn('number', 'Діоксиду вуглецю');
+
+            for (var i = 0; i < YearMass.length; i++) {
+                data.addRow([YearMass[i], CarbonDioxideMass[i]]);
+            }
+
+            var options = {
+
+                vAxis: {
+                    title: 'млн.т'
+                }
+        };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('CarbDionxid_chart_div'));
+        chart.draw(data, options);
+    }
+
+    function drawAuto() {
+            var YearMass = @Json.Serialize(ViewBag.YearsMass);
+            var FromMobileSourcesMass = @Json.Serialize(ViewBag.FromMobileSourcesMass);
+
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Рік');
+            data.addColumn('number', 'Від пересувних джерел забруднення');
+
+            for (var i = 0; i < YearMass.length; i++) {
+                data.addRow([YearMass[i], FromMobileSourcesMass[i]]);
+            }
+
+            var options = {
+                vAxis: {
+                    title: 'тонн'
+                }
+
+
+
+    };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('FromMobileSourcesMass_chart_div'));
+        chart.draw(data, options);
+    }
+
+
+    function drawChartVrp() {
+        var YearsMass = @Json.Serialize(ViewBag.YearsMass);
+        var VrpMass =  @Json.Serialize(ViewBag.VrpMass);
+
+        var Array = [['Рік', 'ВРП']];
+        for (var i = 0; i < YearsMass.length; i++) {
+            Array.push([YearsMass[i], VrpMass[i]]);
+        }
+        var data = google.visualization.arrayToDataTable(Array);
+
+        var options = {
+            title: 'млн. грн',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('vrp_chart'));
+        chart.draw(data, options);
+    }
+
+    function drawChartNumberOfEnterprises() {
+        var YearsMass = @Json.Serialize(ViewBag.YearsMass);
+        var NumberOfEnterprisesMass =  @Json.Serialize(ViewBag.NumberOfEnterprisesMass);
+
+        var Array = [['Рік', 'КП']];
+        for (var i = 0; i < YearsMass.length; i++) {
+            Array.push([YearsMass[i], NumberOfEnterprisesMass[i]]);
+        }
+        var data = google.visualization.arrayToDataTable(Array);
+
+        var options = {
+            title: 'одиниць',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('NumberOfEnterprises_chart'));
+        chart.draw(data, options);
+    }
+
+    function drawChartWasteGeneration() {
+        var YearsMass = @Json.Serialize(ViewBag.YearsMass);
+        var WasteGenerationMass =  @Json.Serialize(ViewBag.WasteGenerationMass);
+
+        var Array = [['Рік', 'УВ']];
+        for (var i = 0; i < YearsMass.length; i++) {
+            Array.push([YearsMass[i], WasteGenerationMass[i]]);
+        }
+        var data = google.visualization.arrayToDataTable(Array);
+
+        var options = {
+            title: '(тис.т.)',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('WasteGeneration_chart'));
+        chart.draw(data, options);
+    }
+
+    function drawChartExpendituresOnEnvProt() {
+        var YearsMass = @Json.Serialize(ViewBag.YearsMass);
+        var ExpendituresOnEnvProtMass =  @Json.Serialize(ViewBag.ExpendituresOnEnvProtMass);
+
+        var Array = [['Рік', 'УВ']];
+        for (var i = 0; i < YearsMass.length; i++) {
+            Array.push([YearsMass[i], ExpendituresOnEnvProtMass[i]]);
+        }
+        var data = google.visualization.arrayToDataTable(Array);
+
+        var options = {
+            title: '(млн. грн.)',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('ExpendituresOnEnvProt_chart'));
+        chart.draw(data, options);
+    }
+
+
+
+
+
+</script>
+
+<h2 class="text-center">Регіональна статистика</h2>
+
+<form method="get">
+    <div class="form-inline">
+
+        <label style="margin:10px">Оберіть регіон: </label>
+        <select name="region" asp-items="Model.Regions"  class="form-control"></select>
+
+        <input style="margin:10px" type="submit" value="Пошук" class="btn btn-outline-dark" />
+    </div>
+</form>
+
+<h3 class="text-left">@ViewBag.Region</h3>
+
+<table class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th >
+                Рік
+            </th>
+            <th title="Валовий регіональний продукт, (млн.грн)">
+                ВРП
+            </th>
+            <th title="Кількість підприємств, (одиниць)">
+                КП
+            </th>
+            <th title="Утворення відходів, 	(тис.т.)">
+                УВ
+            </th>
+            <th title="Витрати на охорону навколишнього природного середовища, (млн. грн.)">
+                Витрати
+            </th>
+            <th title="Обсяг викидів забруд-нюючих речовин − усього, (тис.т)">
+                ЗР
+            </th>
+            <th title="Оксиду вуглецю, (тис.т)">
+                CO
+            </th>
+            <th title="Метану, (тис.т)">
+                CH<sub>4</sub>
+            </th>
+            <th title="Діоксиду азоту, (тис.т)">
+                NO<sub>2</sub>
+            </th>
+            <th title="Оксиду азоту, (тис.т)">
+                N<sub>2</sub>O
+            </th>
+            <th title="Сажі, (тис.т)">
+                Сажі
+            </th>
+            <th title="Діоксиду сірки, (тис.т)">
+                SO2
+            </th>
+            <th title="Неметанових легких органічних сполук, (тис.т)">
+                НМЛОС
+            </th>
+            <th title="Діоксиду вуглецю, (млн.т)">
+                CO<sub>2</sub>
+            </th>
+            <th title="Викиди від пересувних джерел забруднення, (т.)">
+                Авто
+            </th>
+        </tr> 
+    </thead>
+    <tbody>
+        @foreach (IndicatorsModel item in Model.Indicators)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year.YearNumb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vrp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfEnterprises)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WasteGeneration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpendituresOnEnvProt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalEmissions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarbonMonoxide)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Methane)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NitrogenDioxide)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NitricOxide)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Soot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SulfurDioxide)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NonMetOrgCompounds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarbonDioxide)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromMobileSources)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="container">
+    <h4 class="text-left">Динаміка викидів осовних забруднюючих речовин, (тис.т)</h4>
+    <div id="columnchart_values" style="width: 900px; height: 400px;"></div>
+    <h4 class="text-left">Динаміка інших викидів</h4>
+    <h5 class="text-center">Діоксиду вуглецю</h5>
+    <div id="CarbDionxid_chart_div" style="width: 900px; height: 400px;"></div>
+    <h5 class="text-center">Від пересувних джерел забруднення</h5>
+    <div id="FromMobileSourcesMass_chart_div" style="width: 900px; height: 400px;"></div>
+    <h4 class="text-left">Динаміка зміни індикаторів</h4>
+    <h5 class="text-center">Валовий регіональний продукт</h5>
+    <div id="vrp_chart" style="width: 900px; height: 400px;"></div>
+    <h5 class="text-center">Кількість підприємств</h5>
+    <div id="NumberOfEnterprises_chart" style="width: 900px; height: 400px;"></div>
+    <h5 class="text-center">Утворення відходів</h5>
+    <div id="WasteGeneration_chart" style="width: 900px; height: 400px;"></div>
+    <h5 class="text-center">Витрати на охорону навколишнього природного середовища</h5>
+    <div id="ExpendituresOnEnvProt_chart" style="width: 900px; height: 400px;"></div>
+</div>

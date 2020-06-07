@@ -5,8 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<head>
-    <style>
+<style>
 
         rect.selected {
             stroke: #000;
@@ -42,10 +41,13 @@
                 font-size: .8em;
             }
     </style>
-</head>
+
+<h2 class="text-center">Кореляційний аналіз</h2>
+
+<h5>Матриця кореляції базуєтся на усій доступній інформаціі. При актуалізації бази даних значення може змінюватись.</h5>
 
 <div id="legend"></div>
-<div id="grid"></div>
+<div id="grid" style="margin:auto"></div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://unpkg.com/jeezy@1.12.11/lib/jeezy.min.js"></script>
 <script src="https://unpkg.com/data2grid@1.0.0/build/data2grid.min.js"></script>
@@ -53,19 +55,53 @@
 <script>
   d3.select("body").append("div").attr("class", "tip").style("display", "none");
 
-  
-    let json = @Url.Action("GetIndicators", "Monitoring");
-    alert(typeof json);
-
     var data = [];
-    var cols = "abcdefghijklmnopqr".split("");
-  for (var i = 0; i <= 30; i++){
-    var obj = {index: i};
-    cols.forEach(col => {
-      obj[col] = jz.num.randBetween(1, 100);
-    });
-    data.push(obj);
-  }
+
+    var cols = @Json.Serialize(ViewBag.StrMas);
+    var IndMatrix = [];
+
+    var VrpMass = @Json.Serialize(ViewBag.VrpMass);
+    var NumberOfEnterprisesMass = @Json.Serialize(ViewBag.NumberOfEnterprisesMass);
+    var WasteGenerationMass = @Json.Serialize(ViewBag.WasteGenerationMass);
+    var ExpendituresOnEnvProtMass = @Json.Serialize(ViewBag.ExpendituresOnEnvProtMass);
+    var TotalEmissionsMass = @Json.Serialize(ViewBag.TotalEmissionsMass);
+    var CarbonMonoxideMass = @Json.Serialize(ViewBag.CarbonMonoxideMass);
+    var MethaneMass = @Json.Serialize(ViewBag.MethaneMass);
+    var NitrogenDioxideMass = @Json.Serialize(ViewBag.NitrogenDioxideMass);
+    var NitricOxideMass = @Json.Serialize(ViewBag.NitricOxideMass);
+    var SootMass = @Json.Serialize(ViewBag.SootMass);
+    var SulfurDioxideMass = @Json.Serialize(ViewBag.SulfurDioxideMass);
+    var NonMetOrgCompoundsMass = @Json.Serialize(ViewBag.NonMetOrgCompoundsMass);
+    var CarbonDioxideMass = @Json.Serialize(ViewBag.CarbonDioxideMass);
+    var FromMobileSourcesMass = @Json.Serialize(ViewBag.FromMobileSourcesMass);
+
+    for (var i = 0; i < VrpMass.length; i++) {
+        IndMatrix[i] = [];
+        IndMatrix[i][0] = VrpMass[i];
+        IndMatrix[i][1] = NumberOfEnterprisesMass[i];
+        IndMatrix[i][2] = WasteGenerationMass[i];
+        IndMatrix[i][3] = ExpendituresOnEnvProtMass[i];
+        IndMatrix[i][4] = TotalEmissionsMass[i];
+        IndMatrix[i][5] = CarbonMonoxideMass[i];
+        IndMatrix[i][6] = MethaneMass[i];
+        IndMatrix[i][7] = NitrogenDioxideMass[i];
+        IndMatrix[i][8] = NitricOxideMass[i];
+        IndMatrix[i][9] = SootMass[i];
+        IndMatrix[i][10] = SulfurDioxideMass[i];
+        IndMatrix[i][11] = NonMetOrgCompoundsMass[i];
+        IndMatrix[i][12] = CarbonDioxideMass[i];
+        IndMatrix[i][13] = FromMobileSourcesMass[i];
+    }
+    for (var i = 0; i < VrpMass.length; i++) {
+        var obj = { index: i };
+        var j = 0;
+        cols.forEach(col => {
+            obj[col] = IndMatrix[i][j];
+            j++;
+           
+        });
+        data.push(obj);
+    }
 
 
  var corr = jz.arr.correlationMatrix(data, cols);
@@ -122,7 +158,8 @@
       .style("fill", function(d){ return c(d.correlation); })
       .style("opacity", 1e-6)
     .transition()
-      .style("opacity", 1);
+        .style("opacity", 1);
+    
 
  svg.selectAll("rect")
 

@@ -90,7 +90,7 @@
                 <a asp-action="Index"
                    asp-route-sortOrder="@(Model.SortViewModel.ExpendituresOnEnvProtSort)"
                    asp-route-year="@(Model.FilterViewModel.SelectedYear)"
-                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">Вит.ОНПС</a>
+                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">Витрати</a>
             </th>
             <th>
                 <a asp-action="Index"
@@ -108,7 +108,7 @@
                 <a asp-action="Index"
                    asp-route-sortOrder="@(Model.SortViewModel.MethaneSort)"
                    asp-route-year="@(Model.FilterViewModel.SelectedYear)"
-                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">CH4></a>
+                   asp-route-region="@(Model.FilterViewModel.SelectedRegion)">CH<sub>4</sub></a>
             </th>
             <th>
                 <a asp-action="Index"
@@ -207,7 +207,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FromMobileSources)
                 </td>
-                <td>
+                <td nowrap>
                     <a asp-action="Edit" asp-route-id="@item.Id"  class="btn btn-secondary"><i class="fas fa-pen-square"></i></a> |
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-info"></i></a> |
                     <a asp-action="Delete" asp-route-id="@item.Id"class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>

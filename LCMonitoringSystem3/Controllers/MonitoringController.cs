@@ -8,9 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using LCMonitoringSystem3.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.JSInterop;
+using System.Globalization;
 
 namespace LCMonitoringSystem3.Controllers
 {
+    class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+    }
     public class MonitoringController : Controller
     {
         private readonly IndicatorsDbContext _context;
@@ -21,61 +28,218 @@ namespace LCMonitoringSystem3.Controllers
         }
 
         [Authorize(Roles = "admin, user")]
-        public IActionResult Index()
+        public IActionResult Correlation()
         {
             IQueryable<IndicatorsModel> indicators = _context.Indicators.Include(i => i.Region).Include(i => i.Year);
 
-            string[] colms = new string[14];
-            colms[0] = "ВРП";
-            colms[1] = "Кп";
-            colms[2] = "УВ";
-            colms[3] = "Вит.ОНПС";
-            colms[4] = "ЗР";
-            colms[5] = "CO";
-            colms[6] = "CH4";
-            colms[7] = "NO2";
-            colms[8] = "N2O";
-            colms[9] = "Сажі";
-            colms[10] = "SO2";
-            colms[11] = "НМЛОС";
-            colms[12] = "CO2";
-            colms[13] = "Авто";
+            int IndNamesMassSize = _context.Info.Count();
+            string[] IndNamesMass = new string[IndNamesMassSize];
+            int i = 0;
+            foreach (IndicatorInfo n in _context.Info)
+            {
+                IndNamesMass[i] = n.ShortName;
+                i++;
+            }
+            ViewBag.StrMas = IndNamesMass;
 
-            ViewBag.cols = "abcdefghijklmnopqrstuvwxyz";
+            int IndMassSize = indicators.Count();
 
+            double[] VrpMass = new double[IndMassSize];
+            double[] NumberOfEnterprisesMass = new double[IndMassSize];
+            double[] WasteGenerationMass = new double[IndMassSize];
+            double[] ExpendituresOnEnvProtMass = new double[IndMassSize];
+            double[] TotalEmissionsMass = new double[IndMassSize];
+            double[] CarbonMonoxideMass = new double[IndMassSize];
+            double[] MethaneMass = new double[IndMassSize];
+            double[] NitrogenDioxideMass = new double[IndMassSize];
+            double[] NitricOxideMass = new double[IndMassSize];
+            double[] SootMass = new double[IndMassSize];
+            double[] SulfurDioxideMass = new double[IndMassSize];
+            double[] NonMetOrgCompoundsMass = new double[IndMassSize];
+            double[] CarbonDioxideMass = new double[IndMassSize];
+            double[] FromMobileSourcesMass = new double[IndMassSize];
 
-            return View(_context.Indicators);
+            int i1 = 0;
+            foreach (IndicatorsModel n in indicators)
+            {
+                VrpMass[i1] = n.Vrp;
+                NumberOfEnterprisesMass[i1] = n.NumberOfEnterprises;
+                WasteGenerationMass[i1] = n.WasteGeneration;
+                ExpendituresOnEnvProtMass[i1] = n.ExpendituresOnEnvProt;
+                TotalEmissionsMass[i1] = n.TotalEmissions;
+                CarbonMonoxideMass[i1] = n.CarbonMonoxide;
+                MethaneMass[i1] = n.Methane;
+                NitrogenDioxideMass[i1] = n.NitrogenDioxide;
+                NitricOxideMass[i1] = n.NitricOxide;
+                SootMass[i1] = n.Soot;
+                SulfurDioxideMass[i1] = n.SulfurDioxide;
+                NonMetOrgCompoundsMass[i1] = n.NonMetOrgCompounds;
+                CarbonDioxideMass[i1] = n.CarbonDioxide;
+                FromMobileSourcesMass[i1] = n.FromMobileSources;
+                i1++;
+            }
+
+            ViewBag.VrpMass = VrpMass;
+            ViewBag.NumberOfEnterprisesMass = NumberOfEnterprisesMass;
+            ViewBag.WasteGenerationMass = WasteGenerationMass;
+            ViewBag.ExpendituresOnEnvProtMass = ExpendituresOnEnvProtMass;
+            ViewBag.TotalEmissionsMass = TotalEmissionsMass;
+            ViewBag.CarbonMonoxideMass = CarbonMonoxideMass;
+            ViewBag.MethaneMass = MethaneMass;
+            ViewBag.NitrogenDioxideMass = NitrogenDioxideMass;
+            ViewBag.NitricOxideMass = NitricOxideMass;
+            ViewBag.SootMass = SootMass;
+            ViewBag.SulfurDioxideMass = SulfurDioxideMass;
+            ViewBag.NonMetOrgCompoundsMass = NonMetOrgCompoundsMass;
+            ViewBag.CarbonDioxideMass = CarbonDioxideMass;
+            ViewBag.FromMobileSourcesMass = FromMobileSourcesMass;
+
+            return View(indicators);
         }
-        public JsonResult GetIndicators()
+
+        [Authorize(Roles = "admin, user")]
+        public IActionResult ChartTry()
         {
-           
-            return Json(_context.Indicators);
-        }
+            IQueryable<IndicatorsModel> indicators = _context.Indicators.Include(i => i.Region).Include(i => i.Year);
 
-        public IActionResult SimpleCorrel()
-        {
+            indicators = indicators.Where(p => p.Year.YearNumb == 2017);
+            IndicatorsModel Ind = indicators.FirstOrDefault(p => p.Region.Name == "Україна");
 
-            string[] colms = new string[14];
-            colms[0] = "ВРП";
-            colms[1] = "Кп";
-            colms[2] = "УВ";
-            colms[3] = "Вит.ОНПС";
-            colms[4] = "ЗР";
-            colms[5] = "CO";
-            colms[6] = "CH4";
-            colms[7] = "NO2";
-            colms[8] = "N2O";
-            colms[9] = "Сажі";
-            colms[10] = "SO2";
-            colms[11] = "НМЛОС";
-            colms[12] = "CO2";
-            colms[13] = "Авто";
+            var count = indicators.CountAsync();
+            var items = indicators.ToListAsync();
 
-            ViewBag.StrMas = colms;
+            //ChartViewModel viewModel = new ChartViewModel
+            //{
+            //    ChartFilterViewModel = new ChartFilterViewModel(_context.Years.ToList(), 1, _context.Regions.ToList(), 1),
+            //    Indicators = items,
+            //    Info = _context.Info
+            //};
 
-            ViewBag.Str = "Varvar";
+            int IndNamesMassSize = _context.Info.Count();
+            string[] IndNamesMass = new string[IndNamesMassSize];
+            int i = 0;
+            foreach (IndicatorInfo n in _context.Info)
+            {
+                IndNamesMass[i] = n.ShortName;
+                i++;
+            }
+            ViewBag.NameMass = IndNamesMass;
+
+            double[] IndMass = new double[IndNamesMassSize];
+            IndMass[0] = Ind.Vrp;
+            IndMass[1] = Ind.NumberOfEnterprises;
+            IndMass[2] = Ind.WasteGeneration;
+            IndMass[3] = Ind.ExpendituresOnEnvProt;
+            IndMass[4] = Ind.TotalEmissions;
+            IndMass[5] = Ind.CarbonMonoxide;
+            IndMass[6] = Ind.Methane;
+            IndMass[7] = Ind.NitrogenDioxide;
+            IndMass[8] = Ind.NitricOxide;
+            IndMass[9] = Ind.Soot;
+            IndMass[10] = Ind.SulfurDioxide;
+            IndMass[11] = Ind.NonMetOrgCompounds;
+            IndMass[12] = Ind.CarbonDioxide;
+            IndMass[13] = Ind.FromMobileSources;
+            ViewBag.IndMass = IndMass;
+
+
             return View();
         }
+
+        public IActionResult RegionStat(int? region = 1)
+        {
+            //Фильтрация
+            IQueryable<IndicatorsModel> indicators = _context.Indicators.Include(i => i.Region).Include(i => i.Year);
+
+            if (region != null && region != 0)
+            {
+                indicators = indicators.Where(p => p.RegionId == region);
+            }
+            indicators = indicators.OrderBy(s => s.Year.YearNumb);
+
+            List<Region> regions = _context.Regions.ToList();
+            List<Year> years = _context.Years.ToList();
+
+            ChartFilterViewModel viewModel = new ChartFilterViewModel
+            {
+                Indicators = indicators.ToList(),
+                Regions = new SelectList(regions, "Id", "Name"),
+                Years = new SelectList(years, "Id", "YearName")
+            };
+
+            int IndMassSize = indicators.Count();
+
+            string[] YearsMass = new string[IndMassSize];
+
+            double[] VrpMass = new double[IndMassSize];
+            double[] NumberOfEnterprisesMass = new double[IndMassSize];
+            double[] WasteGenerationMass = new double[IndMassSize];
+            double[] ExpendituresOnEnvProtMass = new double[IndMassSize];
+            double[] TotalEmissionsMass = new double[IndMassSize];
+            double[] CarbonMonoxideMass = new double[IndMassSize];
+            double[] MethaneMass = new double[IndMassSize];
+            double[] NitrogenDioxideMass = new double[IndMassSize];
+            double[] NitricOxideMass = new double[IndMassSize];
+            double[] SootMass = new double[IndMassSize];
+            double[] SulfurDioxideMass = new double[IndMassSize];
+            double[] NonMetOrgCompoundsMass = new double[IndMassSize];
+            double[] CarbonDioxideMass = new double[IndMassSize];
+            double[] FromMobileSourcesMass = new double[IndMassSize];
+
+
+            int i1 = 0;
+            foreach (IndicatorsModel n in indicators)
+            {
+                YearsMass[i1] = n.Year.YearNumb.ToString();
+                VrpMass[i1] = n.Vrp;
+                NumberOfEnterprisesMass[i1] = n.NumberOfEnterprises;
+                WasteGenerationMass[i1] = n.WasteGeneration;
+                ExpendituresOnEnvProtMass[i1] = n.ExpendituresOnEnvProt;
+                TotalEmissionsMass[i1] = n.TotalEmissions;
+                CarbonMonoxideMass[i1] = n.CarbonMonoxide;
+                MethaneMass[i1] = n.Methane;
+                NitrogenDioxideMass[i1] = n.NitrogenDioxide;
+                NitricOxideMass[i1] = n.NitricOxide;
+                SootMass[i1] = n.Soot;
+                SulfurDioxideMass[i1] = n.SulfurDioxide;
+                NonMetOrgCompoundsMass[i1] = n.NonMetOrgCompounds;
+                CarbonDioxideMass[i1] = n.CarbonDioxide;
+                FromMobileSourcesMass[i1] = n.FromMobileSources;
+                i1++;
+            }
+            ViewBag.YearsMass = YearsMass;
+
+            ViewBag.VrpMass = VrpMass;
+            ViewBag.NumberOfEnterprisesMass = NumberOfEnterprisesMass;
+            ViewBag.WasteGenerationMass = WasteGenerationMass;
+            ViewBag.ExpendituresOnEnvProtMass = ExpendituresOnEnvProtMass;
+
+            ViewBag.TotalEmissionsMass = TotalEmissionsMass;
+
+            ViewBag.CarbonMonoxideMass = CarbonMonoxideMass;
+            ViewBag.MethaneMass = MethaneMass;
+            ViewBag.NitrogenDioxideMass = NitrogenDioxideMass;
+            ViewBag.NitricOxideMass = NitricOxideMass;
+            ViewBag.SootMass = SootMass;
+            ViewBag.SulfurDioxideMass = SulfurDioxideMass;
+            ViewBag.NonMetOrgCompoundsMass = NonMetOrgCompoundsMass;
+
+            ViewBag.CarbonDioxideMass = CarbonDioxideMass;
+            ViewBag.FromMobileSourcesMass = FromMobileSourcesMass;
+
+
+
+            Region Reg = _context.Regions.FirstOrDefault(p => p.Id == region);
+            ViewBag.Region = Reg.Name; 
+
+
+            
+
+
+            return View(viewModel);
+        }
+
+
 
     }
 }
