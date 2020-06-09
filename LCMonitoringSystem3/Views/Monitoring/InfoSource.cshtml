@@ -1,0 +1,226 @@
+﻿@model IEnumerable<LCMonitoringSystem3.Models.IndicatorInfo>
+
+@{
+    ViewData["Title"] = "Джерела";
+}
+
+<h2 class="text-center">Джерела даних</h2>
+
+<p>Головним джерелом даних є <a href="http://www.ukrstat.gov.ua/">Державна служба статистики України</a></p>
+
+<table class="table table-striped table-bordered" style="width:70%; margin: auto;">
+    <thead>
+        <tr>
+            <th>
+                Повна назва
+            </th>
+            <th>
+                Скорочення
+            </th>
+            <th>
+                Одиниці вимірювання
+            </th>
+            <th>
+              
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Валовий регіональний продукт
+            </td>
+            <td>
+                ВПР
+            </td>
+            <td>
+                (млн.грн)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/operativ/operativ2008/vvp/vrp/vrp2018_ost_u.xls">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Кількість підприємств
+            </td>
+            <td>
+                КП
+            </td>
+            <td>
+                (одиниць)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/operativ/operativ2013/fin/kp_reg/kp_reg_u/arh_kp_reg_u.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Утворення відходів
+            </td>
+            <td>
+                УВ
+            </td>
+            <td>
+                (тис.т.)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Витрати на охорону навколишнього природного середовища
+            </td>
+            <td>
+                Витрати
+            </td>
+            <td>
+                (млн.грн)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Обсяг викидів забруд-нюючих речовин − усього
+            </td>
+            <td>
+                ВЗР
+            </td>
+            <td>
+                (тис.т)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Оксиду вуглецю
+            </td>
+            <td>
+                СО
+            </td>
+            <td>
+                (тис.т)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Метану
+            </td>
+            <td>
+                СН4
+            </td>
+            <td>
+                (тис.т)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Діоксиду азоту
+            </td>
+            <td>
+                ВПР
+            </td>
+            <td>
+                NO2
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Оксиду азоту
+            </td>
+            <td>
+                N2O
+            </td>
+            <td>
+                (тис.т)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Сажі
+            </td>
+            <td>
+                Сажі
+            </td>
+            <td>
+                (тис.т)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Діоксиду сірки
+            </td>
+            <td>
+                SO2
+            </td>
+            <td>
+                (тис.т)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Неметанових легких органічних сполук
+            </td>
+            <td>
+                НМЛОС
+            </td>
+            <td>
+                (тис.т)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Діоксиду вуглецю
+            </td>
+            <td>
+                CO2
+            </td>
+            <td>
+                (млн.т)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Викиди від пересувних джерел забруднення
+            </td>
+            <td>
+                Авто
+            </td>
+            <td>
+                (т.)
+            </td>
+            <td>
+                <a href="http://www.ukrstat.gov.ua/druk/publicat/Arhiv_u/07/Arch_dov_zb.htm">Джерело</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

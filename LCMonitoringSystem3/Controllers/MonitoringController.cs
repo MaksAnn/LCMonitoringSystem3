@@ -239,6 +239,109 @@ namespace LCMonitoringSystem3.Controllers
             return View(viewModel);
         }
 
+        public IActionResult YearsStat(int? year = 2)
+        {
+            //Фильтрация
+            IQueryable<IndicatorsModel> indicators = _context.Indicators.Include(i => i.Region).Include(i => i.Year);
+
+            if (year != null && year != 0)
+            {
+                indicators = indicators.Where(p => p.YearId == year);
+            }
+            //indicators = indicators.OrderBy(s => s.Year.YearNumb);
+
+            List<Region> regions = _context.Regions.ToList();
+            List<Year> years = _context.Years.ToList();
+
+            ChartFilterViewModel viewModel = new ChartFilterViewModel
+            {
+                Indicators = indicators.ToList(),
+                Regions = new SelectList(regions, "Id", "Name"),
+                Years = new SelectList(years, "Id", "YearName")
+            };
+
+            int IndMassSize = indicators.Count() - 1;
+
+            string[] RegionMass = new string[IndMassSize];
+
+            double[] VrpMass = new double[IndMassSize];
+            double[] NumberOfEnterprisesMass = new double[IndMassSize];
+            double[] WasteGenerationMass = new double[IndMassSize];
+            double[] ExpendituresOnEnvProtMass = new double[IndMassSize];
+            double[] TotalEmissionsMass = new double[IndMassSize];
+            double[] CarbonMonoxideMass = new double[IndMassSize];
+            double[] MethaneMass = new double[IndMassSize];
+            double[] NitrogenDioxideMass = new double[IndMassSize];
+            double[] NitricOxideMass = new double[IndMassSize];
+            double[] SootMass = new double[IndMassSize];
+            double[] SulfurDioxideMass = new double[IndMassSize];
+            double[] NonMetOrgCompoundsMass = new double[IndMassSize];
+            double[] CarbonDioxideMass = new double[IndMassSize];
+            double[] FromMobileSourcesMass = new double[IndMassSize];
+
+
+            int i1 = 0;
+            foreach (IndicatorsModel n in indicators)
+            {
+                if (n.Region.Name != "Україна")
+                {
+                    RegionMass[i1] = n.Region.Name;
+                    VrpMass[i1] = n.Vrp;
+                    NumberOfEnterprisesMass[i1] = n.NumberOfEnterprises;
+                    WasteGenerationMass[i1] = n.WasteGeneration;
+                    ExpendituresOnEnvProtMass[i1] = n.ExpendituresOnEnvProt;
+                    TotalEmissionsMass[i1] = n.TotalEmissions;
+                    CarbonMonoxideMass[i1] = n.CarbonMonoxide;
+                    MethaneMass[i1] = n.Methane;
+                    NitrogenDioxideMass[i1] = n.NitrogenDioxide;
+                    NitricOxideMass[i1] = n.NitricOxide;
+                    SootMass[i1] = n.Soot;
+                    SulfurDioxideMass[i1] = n.SulfurDioxide;
+                    NonMetOrgCompoundsMass[i1] = n.NonMetOrgCompounds;
+                    CarbonDioxideMass[i1] = n.CarbonDioxide;
+                    FromMobileSourcesMass[i1] = n.FromMobileSources;
+                    i1++;
+                }
+            }
+            ViewBag.RegionMass = RegionMass;
+
+            ViewBag.VrpMass = VrpMass;
+            ViewBag.NumberOfEnterprisesMass = NumberOfEnterprisesMass;
+            ViewBag.WasteGenerationMass = WasteGenerationMass;
+            ViewBag.ExpendituresOnEnvProtMass = ExpendituresOnEnvProtMass;
+
+            ViewBag.TotalEmissionsMass = TotalEmissionsMass;
+
+            ViewBag.CarbonMonoxideMass = CarbonMonoxideMass;
+            ViewBag.MethaneMass = MethaneMass;
+            ViewBag.NitrogenDioxideMass = NitrogenDioxideMass;
+            ViewBag.NitricOxideMass = NitricOxideMass;
+            ViewBag.SootMass = SootMass;
+            ViewBag.SulfurDioxideMass = SulfurDioxideMass;
+            ViewBag.NonMetOrgCompoundsMass = NonMetOrgCompoundsMass;
+
+            ViewBag.CarbonDioxideMass = CarbonDioxideMass;
+            ViewBag.FromMobileSourcesMass = FromMobileSourcesMass;
+
+
+
+            Year Y = _context.Years.FirstOrDefault(p => p.Id == year);
+            ViewBag.Year = Y.YearName;
+
+
+
+
+
+            return View(viewModel);
+        }
+
+
+        [Authorize(Roles = "admin, user")]
+        public async Task<IActionResult> InfoSource()
+        {
+            return View(await _context.Info.ToListAsync());
+        }
+
 
 
     }

@@ -22,7 +22,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Monitoring" asp-action="RegionStat">Регіональна статистика</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Статистика за роками</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Monitoring" asp-action="YearsStat">Річна статистика</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Індикатори</a>
@@ -33,8 +33,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Indicators" asp-action="Index">Адміністрування БД</a>
                         </li>
-
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Авторизація</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -47,9 +48,9 @@
     </div>
     <footer class="border-top footer text-muted" style="background:white">
         <div class="container">
-            &copy; 2020 Контент доступний за лізензією <a href="https://creativecommons.org/licenses/by/4.0/deed.uk">Creative Commons Attribution 4.0 International license</a>
-
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Джерела даних</a>
+            &copy; 2020 Контент доступний за лізензією <a href="https://creativecommons.org/licenses/by/4.0/deed.uk">Creative Commons Attribution 4.0 International license.</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a asp-area="" asp-controller="Monitoring" asp-action="InfoSource">Джерела даних</a>
         </div>
     </footer>
         

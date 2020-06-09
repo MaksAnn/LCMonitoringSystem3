@@ -104,8 +104,10 @@
     }
 
 
- var corr = jz.arr.correlationMatrix(data, cols);
-             var extent = d3.extent(corr.map(function(d){ return d.correlation; }).filter(function(d){ return d !== 1; }));
+    var corr = jz.arr.correlationMatrix(data, cols);
+ 
+    var extent = d3.extent(corr.map(function (d) { return d.correlation; }).filter(function (d) { return d !== 1; }));
+
 
              var grid = data2grid.grid(corr);
              var rows = d3.max(grid, function(d){ return d.row; });

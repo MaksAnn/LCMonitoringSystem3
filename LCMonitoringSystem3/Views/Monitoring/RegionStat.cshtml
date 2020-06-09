@@ -6,32 +6,6 @@
     ViewData["Title"] = "Регіони";
 }
 
-<style>
-    @@font-face {
-        font-family: 'FontAwesome';
-        src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal
-    }
-
-    .glyphicon {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale
-    }
-
-    .glyphicon-chevron-right:before {
-        content: "\f054";
-    }
-
-    .glyphicon-chevron-left:before {
-        content: "\f053";
-    }
-</style>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
@@ -56,38 +30,28 @@
             var SootMass = @Json.Serialize(ViewBag.SootMass);
             var SulfurDioxideMass = @Json.Serialize(ViewBag.SulfurDioxideMass);
             var NonMetOrgCompoundsMass = @Json.Serialize(ViewBag.NonMetOrgCompoundsMass);
-
             // Create the data table.
             var Array = [
                 ['Рік', 'CO', 'CH4', 'NO2',
                     'N2O', 'Сажі', 'SO2', 'НМЛОС',
-                     { role: 'annotation' }]];
+                     'Середньє']];
             for (var i = 0; i < YearsMas.length; i++) {
+                var average = (CarbonMonoxideMass[i] + MethaneMass[i] + NitrogenDioxideMass[i] + NitricOxideMass[i] + SootMass[i] + SulfurDioxideMass[i] + NonMetOrgCompoundsMass[i]) / 7;
                 Array.push([YearsMas[i], CarbonMonoxideMass[i], MethaneMass[i], NitrogenDioxideMass[i],
-                    NitricOxideMass[i], SootMass[i], SulfurDioxideMass[i], NonMetOrgCompoundsMass[i], '']);
+                    NitricOxideMass[i], SootMass[i], SulfurDioxideMass[i], NonMetOrgCompoundsMass[i], average]);
             }
-
-
-            //['2010', 10, 24, 20, 32, 18, 5, 18, 5, ''],
-            //    ['2020', 16, 22, 23, 30, 16, 9, 18, 5, ''],
-            //    ['2030', 28, 19, 29, 30, 12, 13, 18, 5, ''] ];
 
             var data = google.visualization.arrayToDataTable(Array);
 
 
-
-
             // Set chart options
         var options = {
-                width: 600,
-                height: 400,
-                legend: { position: 'top', maxLines: 3 },
-                bar: { groupWidth: '75%' },
-                isStacked: true,
+                seriesType: 'bars',
+                series: { 7: { type: 'line' } } 
             };
 
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        var chart = new google.visualization.ComboChart(document.getElementById("columnchart_values"));
             chart.draw(data, options);
     }
 
