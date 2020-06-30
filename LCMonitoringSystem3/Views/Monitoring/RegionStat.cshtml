@@ -68,14 +68,13 @@
                 data.addRow([YearMass[i], CarbonDioxideMass[i]]);
             }
 
-            var options = {
-
-                vAxis: {
-                    title: 'млн.т'
-                }
+        var options = {
+            title: 'млн. т',
+            curveType: 'function',
+            legend: { position: 'bottom' }
         };
 
-            var chart = new google.visualization.ColumnChart(document.getElementById('CarbDionxid_chart_div'));
+        var chart = new google.visualization.LineChart(document.getElementById('CarbDionxid_chart_div'));
         chart.draw(data, options);
     }
 
@@ -92,16 +91,14 @@
                 data.addRow([YearMass[i], FromMobileSourcesMass[i]]);
             }
 
-            var options = {
-                vAxis: {
-                    title: 'тонн'
-                }
+        var options = {
+            title: 'тонн',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
 
 
-
-    };
-
-            var chart = new google.visualization.ColumnChart(document.getElementById('FromMobileSourcesMass_chart_div'));
+        var chart = new google.visualization.LineChart(document.getElementById('FromMobileSourcesMass_chart_div'));
         chart.draw(data, options);
     }
 
@@ -170,7 +167,7 @@
         var YearsMass = @Json.Serialize(ViewBag.YearsMass);
         var ExpendituresOnEnvProtMass =  @Json.Serialize(ViewBag.ExpendituresOnEnvProtMass);
 
-        var Array = [['Рік', 'УВ']];
+        var Array = [['Рік', 'Витрати']];
         for (var i = 0; i < YearsMass.length; i++) {
             Array.push([YearsMass[i], ExpendituresOnEnvProtMass[i]]);
         }

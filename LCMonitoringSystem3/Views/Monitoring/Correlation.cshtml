@@ -218,7 +218,7 @@
  var gradient = defs.append("linearGradient")
      .attr("id", "linear-gradient");
 
- var stops = [{offset: 0, color: "steelblue", value: extent[0]}, {offset: .5, color: "white", value: 0}, {offset: 1, color: "tomato", value: extent[1]}];
+    var stops = [{ offset: 0, color: "steelblue", value: extent[0] }, { offset: .5, color: "white", value: (extent[0] + extent[1])/2 }, {offset: 1, color: "tomato", value: extent[1]}];
 
   gradient.selectAll("stop")
       .data(stops)

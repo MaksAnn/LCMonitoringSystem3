@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LCMonitoringSystem3.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace LCMonitoringSystem3.Controllers
 {
@@ -19,12 +21,14 @@ namespace LCMonitoringSystem3.Controllers
         }
 
         // GET: Years
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Years.ToListAsync());
         }
 
         // GET: Years/Details/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,6 +47,7 @@ namespace LCMonitoringSystem3.Controllers
         }
 
         // GET: Years/Create
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +58,7 @@ namespace LCMonitoringSystem3.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("Id,YearNumb,YearName")] Year year)
         {
             if (ModelState.IsValid)
@@ -65,6 +71,7 @@ namespace LCMonitoringSystem3.Controllers
         }
 
         // GET: Years/Edit/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +92,7 @@ namespace LCMonitoringSystem3.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,YearNumb,YearName")] Year year)
         {
             if (id != year.Id)
@@ -116,6 +124,7 @@ namespace LCMonitoringSystem3.Controllers
         }
 
         // GET: Years/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +145,7 @@ namespace LCMonitoringSystem3.Controllers
         // POST: Years/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var year = await _context.Years.FindAsync(id);

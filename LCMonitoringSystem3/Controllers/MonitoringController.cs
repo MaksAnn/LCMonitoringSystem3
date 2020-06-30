@@ -13,11 +13,7 @@ using System.Globalization;
 
 namespace LCMonitoringSystem3.Controllers
 {
-    class Person
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-    }
+
     public class MonitoringController : Controller
     {
         private readonly IndicatorsDbContext _context;
@@ -97,54 +93,6 @@ namespace LCMonitoringSystem3.Controllers
             return View(indicators);
         }
 
-        [Authorize(Roles = "admin, user")]
-        public IActionResult ChartTry()
-        {
-            IQueryable<IndicatorsModel> indicators = _context.Indicators.Include(i => i.Region).Include(i => i.Year);
-
-            indicators = indicators.Where(p => p.Year.YearNumb == 2017);
-            IndicatorsModel Ind = indicators.FirstOrDefault(p => p.Region.Name == "Україна");
-
-            var count = indicators.CountAsync();
-            var items = indicators.ToListAsync();
-
-            //ChartViewModel viewModel = new ChartViewModel
-            //{
-            //    ChartFilterViewModel = new ChartFilterViewModel(_context.Years.ToList(), 1, _context.Regions.ToList(), 1),
-            //    Indicators = items,
-            //    Info = _context.Info
-            //};
-
-            int IndNamesMassSize = _context.Info.Count();
-            string[] IndNamesMass = new string[IndNamesMassSize];
-            int i = 0;
-            foreach (IndicatorInfo n in _context.Info)
-            {
-                IndNamesMass[i] = n.ShortName;
-                i++;
-            }
-            ViewBag.NameMass = IndNamesMass;
-
-            double[] IndMass = new double[IndNamesMassSize];
-            IndMass[0] = Ind.Vrp;
-            IndMass[1] = Ind.NumberOfEnterprises;
-            IndMass[2] = Ind.WasteGeneration;
-            IndMass[3] = Ind.ExpendituresOnEnvProt;
-            IndMass[4] = Ind.TotalEmissions;
-            IndMass[5] = Ind.CarbonMonoxide;
-            IndMass[6] = Ind.Methane;
-            IndMass[7] = Ind.NitrogenDioxide;
-            IndMass[8] = Ind.NitricOxide;
-            IndMass[9] = Ind.Soot;
-            IndMass[10] = Ind.SulfurDioxide;
-            IndMass[11] = Ind.NonMetOrgCompounds;
-            IndMass[12] = Ind.CarbonDioxide;
-            IndMass[13] = Ind.FromMobileSources;
-            ViewBag.IndMass = IndMass;
-
-
-            return View();
-        }
 
         public IActionResult RegionStat(int? region = 1)
         {
