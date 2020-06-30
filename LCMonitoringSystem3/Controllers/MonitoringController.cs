@@ -22,7 +22,6 @@ namespace LCMonitoringSystem3.Controllers
         {
             _context = context;
         }
-
         [Authorize(Roles = "admin, user")]
         public IActionResult Correlation()
         {
